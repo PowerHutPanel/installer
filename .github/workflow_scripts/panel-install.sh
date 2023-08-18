@@ -29,7 +29,7 @@ set -e
 ######################################################################################
 
 export GITHUB_SOURCE="master"
-export GITHUB_BASE_URL="https://raw.githubusercontent.com/pterodactyl-installer/pterodactyl-installer"
+export GITHUB_BASE_URL="https://raw.githubusercontent.com/PowerHutPanel/installer"
 export email="test@test.com"
 export user_email="test@test.com"
 export user_username="test"
