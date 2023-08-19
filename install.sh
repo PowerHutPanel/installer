@@ -28,7 +28,7 @@ set -e
 #                                                                                    #
 ######################################################################################
 
-export GITHUB_SOURCE="v0.0.1"
+export GITHUB_SOURCE="v0.0.2"
 export SCRIPT_RELEASE="v1.0.1"
 export GITHUB_BASE_URL="https://raw.githubusercontent.com/PowerHutPanel/installer"
 
