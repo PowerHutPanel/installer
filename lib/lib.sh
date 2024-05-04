@@ -6,7 +6,7 @@ set -e
 #                                                                                    #
 # Project 'pterodactyl-installer'                                                    #
 #                                                                                    #
-# Copyright (C) 2018 - 2023, Vilhelm Prytz, <vilhelm@prytznet.se>                    #
+# Copyright (C) 2018 - 2024, Vilhelm Prytz, <vilhelm@prytznet.se>                    #
 #                                                                                    #
 #   This program is free software: you can redistribute it and/or modify             #
 #   it under the terms of the GNU General Public License as published by             #
@@ -49,10 +49,10 @@ export ARCH=""
 export SUPPORTED=false
 
 # download URLs
-export PANEL_DL_URL="https://github.com/PowerHutPanel/panel/releases/latest/download/panel.tar.gz"
+export PANEL_DL_URL="https://github.com/pterodactyl/panel/releases/latest/download/panel.tar.gz"
 export WINGS_DL_BASE_URL="https://github.com/pterodactyl/wings/releases/latest/download/wings_linux_"
 export MARIADB_URL="https://downloads.mariadb.com/MariaDB/mariadb_repo_setup"
-export GITHUB_BASE_URL=${GITHUB_BASE_URL:-"https://raw.githubusercontent.com/PowerHutPanel/installer"}
+export GITHUB_BASE_URL=${GITHUB_BASE_URL:-"https://raw.githubusercontent.com/pterodactyl-installer/pterodactyl-installer"}
 export GITHUB_URL="$GITHUB_BASE_URL/$GITHUB_SOURCE"
 
 # Colors
@@ -124,8 +124,8 @@ welcome() {
   print_brake 70
   output "Pterodactyl panel installation script @ $SCRIPT_RELEASE"
   output ""
-  output "Copyright (C) 2018 - 2023, Marques Scripps, <support@powerhut.pro>"
-  output "https://github.com/PowerHutPanel/installer"
+  output "Copyright (C) 2018 - 2024, Vilhelm Prytz, <vilhelm@prytznet.se>"
+  output "https://github.com/pterodactyl-installer/pterodactyl-installer"
   output ""
   output "This script is not associated with the official Pterodactyl Project."
   output ""
@@ -202,8 +202,8 @@ create_db_user() {
 
   output "Creating database user $db_user_name..."
 
-  mysql -u root -e "CREATE USER '$db_user_name'@'$db_host' IDENTIFIED BY '$db_user_password';"
-  mysql -u root -e "FLUSH PRIVILEGES;"
+  mariadb -u root -e "CREATE USER '$db_user_name'@'$db_host' IDENTIFIED BY '$db_user_password';"
+  mariadb -u root -e "FLUSH PRIVILEGES;"
 
   output "Database user $db_user_name created"
 }
@@ -215,8 +215,8 @@ grant_all_privileges() {
 
   output "Granting all privileges on $db_name to $db_user_name..."
 
-  mysql -u root -e "GRANT ALL PRIVILEGES ON $db_name.* TO '$db_user_name'@'$db_host' WITH GRANT OPTION;"
-  mysql -u root -e "FLUSH PRIVILEGES;"
+  mariadb -u root -e "GRANT ALL PRIVILEGES ON $db_name.* TO '$db_user_name'@'$db_host' WITH GRANT OPTION;"
+  mariadb -u root -e "FLUSH PRIVILEGES;"
 
   output "Privileges granted"
 
@@ -229,7 +229,7 @@ create_db() {
 
   output "Creating database $db_name..."
 
-  mysql -u root -e "CREATE DATABASE $db_name;"
+  mariadb -u root -e "CREATE DATABASE $db_name;"
   grant_all_privileges "$db_name" "$db_user_name" "$db_host"
 
   output "Database $db_name created"
